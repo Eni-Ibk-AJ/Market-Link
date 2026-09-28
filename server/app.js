@@ -21,17 +21,11 @@ var app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-<<<<<<< HEAD
+  "https://marketlink-orcin.vercel.app/",
   "http://localhost:5173",
   "http://localhost:3000",
   // 'https://teslasafebroker.com',
   //  'https://api.teslasafebroker.com',
-=======
-    'http://localhost:3000', 
-    'http://localhost:5173', 
-    // 'https://teslasafebroker.com',
-    //  'https://api.teslasafebroker.com', 
->>>>>>> f0f338475f6dca0050fb276415fa4de8c66b3ba1
 ];
 
 app.use(
@@ -60,7 +54,6 @@ userInfoController(app);
 marketController(app);
 productController(app);
 orderController(app);
-<<<<<<< HEAD
 reviewController(app);
 app.get(
   "/api/admin/dashboard",
@@ -86,12 +79,10 @@ app.delete(
   authorizeRoles("admin"),
   adminController.deleteUser,
 );
-=======
 reviewController(app); 
 adminController(app);
 
 
->>>>>>> f0f338475f6dca0050fb276415fa4de8c66b3ba1
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
