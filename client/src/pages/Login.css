@@ -1,0 +1,18 @@
+.login-page { min-height: 690px; display: grid; grid-template-columns: 1fr 1fr; background: var(--paper); }
+.login-image { position: relative; min-height: 650px; background: linear-gradient(0deg, rgba(16,45,32,.72), rgba(16,45,32,.03) 80%), url('https://images.unsplash.com/photo-1573246123716-6b1782bfc499?auto=format&fit=crop&w=1200&q=85') center/cover; }
+.login-image > span { position: absolute; left: max(40px, calc((100vw - 1320px) / 2)); bottom: 38px; display: flex; align-items: center; gap: 9px; color: white; font-weight: 800; font-size: 1.1rem; }
+.login-form-side { display: grid; place-items: center; padding: 55px 34px; }
+.login-form-wrap { width: min(410px, 100%); }
+.login-form-wrap h1 { margin: 11px 0 8px; color: var(--forest-dark); font: 500 2.55rem/1.08 Georgia, 'Times New Roman', serif; }
+.login-form-wrap > p { margin: 0 0 30px; color: var(--muted); font-size: .9rem; }
+.login-form-wrap form { display: grid; gap: 17px; }
+.login-options { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: .78rem; }
+.login-options label { display: flex; align-items: center; gap: 7px; }
+.login-options input { accent-color: var(--forest); }
+.login-options button, .admin-shortcut { border: 0; background: transparent; color: var(--leaf); font-size: .78rem; }
+.login-submit, .register-link { width: 100%; }
+.form-error { padding: 10px 12px; border-radius: 4px; background: #fff0eb; color: #98452f !important; font-size: .82rem !important; }
+.login-divider { display: flex; align-items: center; gap: 13px; margin: 24px 0 15px; color: #8a958a; font-size: .76rem; }
+.login-divider::before, .login-divider::after { content: ''; height: 1px; flex: 1; background: var(--line); }
+.admin-shortcut { display: block; margin: 19px auto 0; }
+@media (max-width: 760px) { .login-page { grid-template-columns: 1fr; } .login-image { min-height: 220px; background-position: center 44%; } .login-image > span { left: 24px; bottom: 20px; } .login-form-side { padding: 45px 20px 58px; } .login-form-wrap h1 { font-size: 2.1rem; } }

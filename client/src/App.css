@@ -1,0 +1,40 @@
+.app-main { min-height: calc(100vh - 188px); }
+.content-width { width: min(1320px, calc(100% - 72px)); margin-inline: auto; }
+.section-space { padding-block: 80px; }
+.eyebrow { color: var(--leaf); font-size: .74rem; font-weight: 800; text-transform: uppercase; }
+.button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid transparent; border-radius: 6px; padding: 0 20px; font-weight: 700; text-decoration: none; transition: background .18s ease, transform .18s ease; }
+.button:hover { transform: translateY(-1px); }
+.button-primary { background: var(--orange); color: white; }
+.button-primary:hover { background: var(--orange-dark); }
+.button-light { background: var(--paper); color: var(--forest); border-color: var(--line); }
+.empty-state { min-height: 210px; display: grid; place-items: center; border: 1px dashed #cdd5c9; border-radius: 8px; color: var(--muted); text-align: center; padding: 28px; background: rgba(255, 254, 251, .68); }
+.empty-state svg { color: #92a18e; margin-bottom: 12px; }
+.empty-state strong { display: block; color: var(--forest); font-size: 1rem; margin-bottom: 5px; }
+.panel { border: 1px solid var(--line); background: var(--paper); border-radius: 8px; box-shadow: 0 8px 24px rgba(31,54,37,.04); }
+.field { display: grid; gap: 7px; color: var(--ink); font-size: .88rem; font-weight: 650; }
+.field input, .field select, .field textarea { width: 100%; min-height: 46px; border: 1px solid #d8ded4; border-radius: 5px; background: #fff; padding: 10px 12px; color: var(--ink); }
+.field textarea { min-height: 110px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: #a1aaa0; font-weight: 400; }
+@media (max-width: 760px) { .content-width { width: min(100% - 36px, 600px); } .section-space { padding-block: 54px; } }
+
+.ticks {
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+  &::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}
