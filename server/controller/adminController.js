@@ -2,64 +2,32 @@ const User = require('../model/userSchema');
 const Product = require('../model/productSchema');
 const Market = require('../model/marketSchema');
 const Order = require('../model/orderSchema');
-// Get high-level platform analytics for admin dashboard
-exports.getAdminDashboard = async (req, res) => {
-  try {
-    const totalUsers = await User.countDocuments();
-    const totalFarmers = await User.countDocuments({ role: 'farmer' });
-    const totalCustomers = await User.countDocuments({ role: 'customer' });
-    const totalMarkets = await Market.countDocuments();
-    const totalProducts = await Product.countDocuments();
-    const totalOrders = await Order.countDocuments();
-    const completedOrders = await Order.aggregate([
-      { $match: { status: 'completed' } },
-      { $group: { _id: null, totalRevenue: { $sum: '$totalAmount' } } }
-    ]);
+const express = require('express');
 
-    res.status(200).json({
-      success: true,
-      data: {
-        totalUsers,
-        totalFarmers,
-        totalCustomers,
-        totalMarkets,
-        totalProducts,
-        totalOrders,
-        totalRevenue: completedOrders[0]?.totalRevenue || 0
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching admin dashboard analytics', error: error.message });
-  }
-};
+module.exports = function (app) {
+  // 1. Get Admin Dashboard Analytics
+  app.get('/api/admin/dashboard', async (req, res) => {
+    try {
+      const totalUsers = await User.countDocuments();
+      const totalFarmers = await User.countDocuments({ role: 'farmer' });
+      const totalCustomers = await User.countDocuments({ role: 'customer' });
+      const totalMarkets = await Market.countDocuments();
+      const totalProducts = await Product.countDocuments();
+      const totalOrders = await Order.countDocuments();
 
-// Get all registered users (supports filtering by role)
-exports.getAllUsers = async (req, res) => {
-  try {
-    const { role } = req.query;
-    const filter = role ? { role } : {};
-
-    const users = await User.find(filter).select('-password').sort({ createdAt: -1 });
-
-    res.status(200).json({
-      success: true,
-      count: users.length,
-      data: users
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching users list', error: error.message });
-  }
-};
-
-// Update user status or role (e.g., suspend or upgrade user)
-exports.updateUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { role, status, verified } = req.body;
-
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      res.status(200).json({
+        success: true,
+        data: {
+          totalUsers,
+          totalFarmers,
+          totalCustomers,
+          totalMarkets,
+          totalProducts,
+          totalOrders
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching admin dashboard analytics', error: error.message });
     }
   });
 
