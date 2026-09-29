@@ -38,7 +38,8 @@ export const api = {
 	products: {
 		list: async (params) => (await apiClient.get('/products', { params })).data.products,
 		myProducts: async () => (await apiClient.get('/farmer/products')).data.products,
-		create: async (payload) => (await apiClient.post('/products', payload)).data,
+		create: async (payload) => (a
+			wait apiClient.post('/products', payload)).data,
 		update: async (id, payload) => (await apiClient.put(`/products/${id}`, payload)).data,
 		remove: async (id) => (await apiClient.delete(`/products/${id}`)).data,
 	},
