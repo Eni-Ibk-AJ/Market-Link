@@ -79,8 +79,7 @@ app.delete(
   authorizeRoles("admin"),
   adminController.deleteUser,
 );
-reviewController(app); 
-adminController(app);
+
 
 
 
