@@ -2,7 +2,6 @@ const User = require('../model/userSchema');
 const Product = require('../model/productSchema');
 const Market = require('../model/marketSchema');
 const Order = require('../model/orderSchema');
-<<<<<<< HEAD
 // Get high-level platform analytics for admin dashboard
 exports.getAdminDashboard = async (req, res) => {
   try {
@@ -61,52 +60,15 @@ exports.updateUser = async (req, res) => {
     const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
-=======
-const express = require('express');
-
-module.exports = function (app) {
-  // 1. Get Admin Dashboard Analytics
-  app.get('/api/admin/dashboard', async (req, res) => {
-    try {
-      const totalUsers = await User.countDocuments();
-      const totalFarmers = await User.countDocuments({ role: 'farmer' });
-      const totalCustomers = await User.countDocuments({ role: 'customer' });
-      const totalMarkets = await Market.countDocuments();
-      const totalProducts = await Product.countDocuments();
-      const totalOrders = await Order.countDocuments();
-
-      res.status(200).json({
-        success: true,
-        data: {
-          totalUsers,
-          totalFarmers,
-          totalCustomers,
-          totalMarkets,
-          totalProducts,
-          totalOrders
-        }
-      });
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching admin dashboard analytics', error: error.message });
->>>>>>> f0f338475f6dca0050fb276415fa4de8c66b3ba1
     }
   });
 
-<<<<<<< HEAD
     if (role) user.role = role;
     if (status && ['pending', 'active', 'suspended'].includes(status)) user.status = status;
     if (typeof verified === 'boolean') user.verified = verified;
-=======
-  // 2. Get All Users
-  app.get('/api/admin/users', async (req, res) => {
-    try {
-      const { role } = req.query;
-      const filter = role ? { role } : {};
->>>>>>> f0f338475f6dca0050fb276415fa4de8c66b3ba1
 
       const users = await User.find(filter).select('-password').sort({ createdAt: -1 });
 
-<<<<<<< HEAD
     res.status(200).json({
       success: true,
       message: 'User updated successfully',
@@ -133,15 +95,6 @@ exports.deleteUser = async (req, res) => {
     const user = await User.findByIdAndDelete(id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
-=======
-      res.status(200).json({
-        success: true,
-        count: users.length,
-        data: users
-      });
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching users list', error: error.message });
->>>>>>> f0f338475f6dca0050fb276415fa4de8c66b3ba1
     }
   });
 
