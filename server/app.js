@@ -21,7 +21,7 @@ var app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-  "https://marketlink-orcin.vercel.app/",
+  "https://marketlink-orcin.vercel.app",
   "http://localhost:5173",
   "http://localhost:3000",
   // 'https://teslasafebroker.com',
@@ -30,7 +30,16 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: "*",
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -70,8 +79,10 @@ app.delete(
   authorizeRoles("admin"),
   adminController.deleteUser,
 );
-reviewController(app);
+reviewController(app); 
 adminController(app);
+
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
